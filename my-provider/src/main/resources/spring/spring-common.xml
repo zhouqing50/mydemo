@@ -4,29 +4,24 @@
 	   xmlns:p="http://www.springframework.org/schema/p"
 	   xmlns:aop="http://www.springframework.org/schema/aop"
 	   xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xmlns:context="http://www.springframework.org/schema/context"
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans
 	   http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
        http://www.springframework.org/schema/aop
 	   http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
 	   http://www.springframework.org/schema/mvc
-	   http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+	   http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-
+	<context:property-placeholder location="classpath:application.properties"/>
+	<import resource="classpath:spring/dubbo-provider.xml" />
 	<!--Log Aop-->
 	<aop:config>
 		<aop:aspect id="logMonitor" ref="logAspect">
 			<aop:pointcut id="monitor"
-						  expression="execution(* com.qinghuaci.controller.*.*(..))" />
+						  expression="execution(* com.qinghuaci.*.*(..))" />
 			<aop:around pointcut-ref="monitor" method="around"/>
 		</aop:aspect>
 	</aop:config>
 	<bean id="logAspect" class="com.qinghuaci.aop.LogAspect"/>
 
-	<!-- rocketMQ -->
-	<bean class="com.qinghuaci.utils.CuratorZkClient"
-		  name="curatorZkClient">
-		<constructor-arg index="0" value="10.22.0.11:2181"/>
-		<constructor-arg index="1" value="/home/zhouq"/>
-	</bean>
-	
 </beans>

@@ -5,21 +5,25 @@
         <artifactId>mydemo</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+
     <modelVersion>4.0.0</modelVersion>
     <artifactId>my-web</artifactId>
     <packaging>war</packaging>
-    <version>1.0-SNAPSHOT</version>
-    <name>my-web Maven Webapp</name>
-    <url>http://maven.apache.org</url>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
         <dependency>
+            <groupId>com.qinghuaci</groupId>
+            <artifactId>my-api</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <scope>test</scope>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
@@ -111,6 +115,17 @@
         <dependency>
             <groupId>org.springframework.amqp</groupId>
             <artifactId>spring-rabbit</artifactId>
+        </dependency>
+
+        <!--dubbo-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>dubbo</artifactId>
+        </dependency>
+        <!--netty-->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty</artifactId>
         </dependency>
 
         <!-- aop -->
