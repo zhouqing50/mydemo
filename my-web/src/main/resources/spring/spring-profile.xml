@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 根据不同环境选择不同配置文件, 可以通过 VM options参数 -Dspring.profiles.active=dev -->
+    <beans profile="default">
+        <context:property-placeholder
+                location="classpath*:/application.properties"/>
+    </beans>
+    <beans profile="dev"> <!-- 开发环境 -->
+        <context:property-placeholder
+                location="classpath*:/application.properties"/>
+    </beans>
+    <beans profile="ops"> <!-- 线上环境 -->
+        <context:property-placeholder
+                location="classpath*:/application.properties"/>
+    </beans>
+
+</beans>

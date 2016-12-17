@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans" xmlns:mongo="http://www.springframework.org/schema/c"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <description>Spring mq配置</description>
+
+    <context:annotation-config />
+    <context:component-scan base-package="com.qinghuaci" />
+
+    <!-- rabbitMQ -->
+    <rabbit:connection-factory id="connectionFactory" host="${queue.host}" port="${queue.port}"
+                               virtual-host="${queue.vhost}" username="${queue.username}"
+                               password="${queue.password}" publisher-confirms="true"/>
+    <rabbit:template id="rabbitTemplate" connection-factory="connectionFactory"
+                     exchange="${queue.exchange.name}" />
+    <!--<rabbit:fanout-exchange name="${queue.exchange.name}" auto-declare="true" durable="true"/>-->
+
+    <!-- queue 队列声明 -->
+    <!-- durable=true,交换机持久化,rabbitmq服务重启交换机依然存在,保证不丢失; durable=false,相反 -->
+    <!-- auto-delete=true:无消费者时，队列自动删除; auto-delete=false：无消费者时，队列不会自动删除 -->
+    <!-- 排他性，exclusive=true:首次申明的connection连接下可见; exclusive=false：所有connection连接下都可见-->
+    <rabbit:queue id="aabb" durable="true" auto-delete="false" exclusive="false" name="aabb" />
+
+    <!-- exchange queue binging key 绑定 -->
+    <!-- durable=true,交换机持久化,rabbitmq服务重启交换机依然存在,保证不丢失; durable=false,相反 -->
+    <!-- auto-delete=true:无消费者时，队列自动删除; auto-delete=false：无消费者时，队列不会自动删除 -->
+    <rabbit:fanout-exchange name="${queue.exchange.name}" auto-declare="true" durable="true">
+        <rabbit:bindings>
+            <rabbit:binding queue="aabb"/>
+        </rabbit:bindings>
+    </rabbit:fanout-exchange>
+
+    <!--&lt;!&ndash; 消息发送到mq回调处理，需要处理错误消息,可选项 &ndash;&gt;-->
+    <!--<bean id="testfailedCallback" class="xxx.TestMsgFailedCallBack"></bean>-->
+    <!--&lt;!&ndash; 消息发送到mq回调处理，接着业务处理 ,可选项&ndash;&gt;-->
+    <!--<bean id="testconfirmCallback" class="xxx.TestconfirmCallback"></bean>-->
+    <!--<bean id="testProducer" class="XXXX.SmartMQProducer">-->
+        <!--<property name="connectionFactory" ref="mqConnectionFactory" />-->
+        <!--<property name="messageConverter" ref="msgConverter" />-->
+        <!--<property name="retryTemplate" ref="retryTemplate" />-->
+        <!--<property name="confirmCallback" ref="testconfirmCallback" />-->
+        <!--<property name="failedCallback" ref="testfailedCallback" />-->
+        <!--<property name="exchange" value="test" />-->
+        <!--<property name="queue" value="test" />-->
+        <!--<property name="routingKey" value="test" />-->
+    <!--</bean>-->
+
+
+    <!-- consumer -->
+    <rabbit:listener-container connection-factory="connectionFactory" acknowledge="auto" >
+        <rabbit:listener queue-names="aabb" ref="consumerMq"/>
+    </rabbit:listener-container>
+
+</beans>

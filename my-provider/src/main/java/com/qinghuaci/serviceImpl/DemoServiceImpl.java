@@ -16,10 +16,13 @@
 package com.qinghuaci.serviceImpl;
 
 import com.alibaba.dubbo.rpc.RpcContext;
+import com.qinghuaci.dao.MongoTestDao;
+import com.qinghuaci.model.User;
 import com.qinghuaci.service.DemoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -27,8 +30,15 @@ import java.util.Date;
 @Service("demoServiceImpl")
 public class DemoServiceImpl implements DemoService {
 
+    @Resource
+    private MongoTestDao mongoTestDao;
+
     public String sayHello(String name) {
         System.out.println("[" + new SimpleDateFormat("HH:mm:ss").format(new Date()) + "] Hello " + name + ", request from consumer: " + RpcContext.getContext().getRemoteAddress());
+        User user = new User();
+        user.setAge(22);
+        user.setName(name);
+        mongoTestDao.save(user);
         return "Hello " + name + ", response form provider: " + RpcContext.getContext().getLocalAddress();
     }
 

@@ -45,7 +45,9 @@ public class CuratorZkController {
             log.info("cpath path={}, data={}", cPath, data);
         }
         client.setData().forPath(cPath, data.getBytes(CommonStant.UTF_8));
-        return new String(client.getData().forPath(cPath), CommonStant.UTF_8);
+        String result = new String(client.getData().forPath(cPath), CommonStant.UTF_8);
+        log.info("result={}", result);
+        return result;
     }
 
     /**
