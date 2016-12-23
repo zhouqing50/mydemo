@@ -19,7 +19,7 @@ import java.net.URISyntaxException;
 
 /**
  * Description:
- * User: zhouq
+ * Tuser: zhouq
  * Date: 2016/12/14
  */
 
@@ -60,7 +60,7 @@ public class HttpClientT {
                     .setConnectionRequestTimeout(5000).build();
 
             httpGet.setConfig(requestConfig);
-            httpGet.setHeader("User-Agent", HEADER_USER_AGENT);
+            httpGet.setHeader("Tuser-Agent", HEADER_USER_AGENT);
             response = httpClient.execute(httpGet);
             if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
                 log.error("response' status code is not 200.sourceImageUrl[{}],response[{}]", sourceImageUrl, response);

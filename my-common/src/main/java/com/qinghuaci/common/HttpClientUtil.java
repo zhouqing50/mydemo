@@ -1,4 +1,4 @@
-package com.qinghuaci.utils;
+package com.qinghuaci.common;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;

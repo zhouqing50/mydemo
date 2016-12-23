@@ -1,4 +1,4 @@
-package com.qinghuaci.utils;
+package com.qinghuaci.common;
 
 import com.google.common.collect.Lists;
 import com.google.zxing.*;

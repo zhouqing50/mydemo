@@ -2,7 +2,7 @@ package com.qinghuaci.common.constants;
 
 /**
  * Description:
- * User: zhouq
+ * Tuser: zhouq
  * Date: 2016/12/8
  */
 public class CommonStant {

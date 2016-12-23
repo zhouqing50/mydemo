@@ -12,7 +12,7 @@ import org.springframework.beans.factory.InitializingBean;
 
 /**
  * Description:
- * User: zhouq
+ * Tuser: zhouq
  * Date: 2016/12/8
  */
 @Slf4j
