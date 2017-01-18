@@ -9,6 +9,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
@@ -88,6 +89,12 @@ public class HttpClientUtil {
         HttpPost httpPost = new HttpPost(url);
         ArrayList<NameValuePair> pairs = covertParams2NVPS(params);
         httpPost.setEntity(new UrlEncodedFormEntity(pairs, UTF_8));
+        return getResult(httpPost);
+    }
+
+    public static String httpPostRequest(String url, String json) throws UnsupportedEncodingException {
+        HttpPost httpPost = new HttpPost(url);
+        httpPost.setEntity(new StringEntity(json, UTF_8));
         return getResult(httpPost);
     }
 

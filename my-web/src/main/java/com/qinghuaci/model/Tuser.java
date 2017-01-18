@@ -1,8 +1,6 @@
 package com.qinghuaci.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -12,22 +10,16 @@ import java.io.Serializable;
  * Date: 2016/12/12
  */
 
+@Data
+@NoArgsConstructor
 @ToString
 public class Tuser implements Serializable {
 
-    @Getter
-    @Setter
-    Integer id;
+    private Integer id;
 
-    @Getter
-    @Setter
-    String name;
+    private String name;
 
-    @Getter
-    @Setter
-    Integer age;
+    private Integer age;
 
-    @Getter
-    @Setter
-    String desc;
+    private String desc;
 }

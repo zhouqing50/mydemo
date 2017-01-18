@@ -11,6 +11,12 @@
 
     <artifactId>my-api</artifactId>
     <version>${my-api.version}</version>
+    <dependencies>
+        <dependency>
+            <groupId>com.qinghuaci</groupId>
+            <artifactId>my-common</artifactId>
+        </dependency>
+    </dependencies>
     <packaging>jar</packaging>
 
 </project>

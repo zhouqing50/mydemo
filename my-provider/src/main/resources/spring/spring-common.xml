@@ -16,10 +16,10 @@
 	<aop:config>
 		<aop:aspect id="logMonitor" ref="logAspect">
 			<aop:pointcut id="monitor"
-						  expression="execution(* com.qinghuaci.*.*(..))" />
+						  expression="execution(* com.qinghuaci.service.impl..*.*(..))" />
 			<aop:around pointcut-ref="monitor" method="around"/>
 		</aop:aspect>
 	</aop:config>
-	<bean id="logAspect" class="com.qinghuaci.aop.LogAspect"/>
+	<bean id="logAspect" class="com.qinghuaci.aop.LogAndResultAspect"/>
 
 </beans>
