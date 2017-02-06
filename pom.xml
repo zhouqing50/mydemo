@@ -11,6 +11,7 @@
         <module>my-provider</module>
         <module>my-api</module>
         <module>my-common</module>
+        <module>my-swagger</module>
     </modules>
 
     <properties>

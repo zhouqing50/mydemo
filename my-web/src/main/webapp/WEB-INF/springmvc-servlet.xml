@@ -18,14 +18,14 @@
 		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
 		<property name="order" value="2" />
 	</bean>
-	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
-        <property name="messageConverters">
-            <list>
-                <bean class="com.qinghuaci.utils.JsonHttpMessageConverterFsImpl"/>
-            </list>
-        </property>
-    </bean>
-    
+	<!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">-->
+        <!--<property name="messageConverters">-->
+            <!--<list>-->
+                <!--<bean class="com.qinghuaci.utils.JsonHttpMessageConverterFsImpl"/>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
+    <!---->
      <!--<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  -->
           <!--<property name="defaultEncoding" value="UTF-8" />  -->
           <!--<property name="maxUploadSize" value="10485760000" />  -->
@@ -43,6 +43,12 @@
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+
+	<!-- Enables swgger ui-->
+	<mvc:resources mapping="/swagger/**" location="/WEB-INF/swagger-ui/"/>
+	<!-- Include a swagger configuration-->
+	<bean class="com.qinghuaci.controller.SwaggerConfig"/>
+
 	<bean id="utf8charset" class="java.nio.charset.Charset"
 		factory-method="forName">
 		<constructor-arg value="UTF-8" />
@@ -53,9 +59,9 @@
 				<constructor-arg ref="utf8charset"/>
 				<property name="writeAcceptCharset" value="false" />
 			</bean>
-			<bean
-				class="com.qinghuaci.utils.JsonHttpMessageConverterFsImpl" >
-			</bean>
+			<!--<bean-->
+				<!--class="com.qinghuaci.utils.JsonHttpMessageConverterFsImpl" >-->
+			<!--</bean>-->
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 </beans>

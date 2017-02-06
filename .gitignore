@@ -1,1 +1,16 @@
 # Created by .ignore support plugin (hsz.mobi)
+.idea/
+my-api/my-api.iml
+my-api/target/
+my-common/my-common.iml
+my-common/src/test/
+my-common/target/
+my-provider/my-provider.iml
+my-provider/src/main/java/com/qinghuaci/manager/
+my-swagger/my-swagger.iml
+my-web.rar
+my-web/.dubbo/
+my-web/catalina.base_IS_UNDEFINED/
+my-web/my-web.iml
+my-web/target/
+/my-provider/catalina.base_IS_UNDEFINED/

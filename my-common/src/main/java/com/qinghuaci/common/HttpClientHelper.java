@@ -1,6 +1,7 @@
 package com.qinghuaci.common;
 
 
+import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -14,7 +15,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -91,8 +91,10 @@ public class HttpClientHelper {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
             HttpPost httpPost = new HttpPost(uri);
-            List<NameValuePair> nvps = new ArrayList<>();
-            map.keySet().forEach(key -> nvps.add(new BasicNameValuePair(key, map.get(key))));
+            List<NameValuePair> nvps = Lists.newArrayList();
+            for (String key : map.keySet()) {
+                nvps.add(new BasicNameValuePair(key, map.get(key)));
+            }
             httpPost.setEntity(new UrlEncodedFormEntity(nvps));
             log.debug("Executing post request start uri={}, map={}", uri, JsonKit.object2json(map));
             CloseableHttpResponse response = httpclient.execute(httpPost);
