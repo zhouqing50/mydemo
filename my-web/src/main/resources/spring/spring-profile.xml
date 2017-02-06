@@ -17,7 +17,7 @@
     </beans>
     <beans profile="ops"> <!-- 线上环境 -->
         <context:property-placeholder
-                location="classpath*:/application.properties"/>
+                location="classpath*:/application-ops.properties"/>
     </beans>
 
 </beans>

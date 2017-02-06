@@ -13,13 +13,13 @@
 	<aop:config>
 		<aop:aspect id="logMonitor" ref="logAspect">
 			<aop:pointcut id="monitor"
-						  expression="execution(* com.qinghuaci.controller.*.*(..))" />
+						  expression="execution(* com.qinghuaci.controller..*.*(..))" />
 			<aop:around pointcut-ref="monitor" method="around"/>
 		</aop:aspect>
 	</aop:config>
 	<bean id="logAspect" class="com.qinghuaci.aop.LogAspect"/>
 
-	<!-- rocketMQ -->
+	<!-- zk -->
 	<bean class="com.qinghuaci.utils.CuratorZkClient"
 		  name="curatorZkClient">
 		<constructor-arg index="0" value="10.22.0.11:2181"/>
