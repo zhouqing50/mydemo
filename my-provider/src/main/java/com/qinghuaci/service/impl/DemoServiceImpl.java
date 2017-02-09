@@ -16,6 +16,8 @@
 package com.qinghuaci.service.impl;
 
 import com.alibaba.dubbo.rpc.RpcContext;
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import com.qinghuaci.dao.MongoTestDao;
 import com.qinghuaci.model.User;
 import com.qinghuaci.service.DemoService;
@@ -34,6 +36,7 @@ public class DemoServiceImpl implements DemoService {
     private MongoTestDao mongoTestDao;
 
     public String sayHello(String name) {
+        Preconditions.checkArgument(!Strings.isNullOrEmpty(name), "name is not be null");
         System.out.println("[" + new SimpleDateFormat("HH:mm:ss").format(new Date()) + "] Hello " + name + ", request from consumer: " + RpcContext.getContext().getRemoteAddress());
         User user = new User();
         user.setAge(22);
