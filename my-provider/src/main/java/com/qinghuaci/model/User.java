@@ -8,6 +8,7 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Description:
@@ -34,4 +35,8 @@ public class User implements Serializable {
     @Getter
     @Setter
     String desc;
+
+    @Getter
+    @Setter
+    List<Tuser> tusers;
 }

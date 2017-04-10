@@ -85,15 +85,19 @@ public class HttpClientUtil {
         return getResult(httpPost);
     }
 
-    public static String httpPostRequest(String url, Map<String, Object> params) throws UnsupportedEncodingException {
+    public static String httpPostFormRequest(String url, Map<String, Object> params) throws UnsupportedEncodingException {
         HttpPost httpPost = new HttpPost(url);
         ArrayList<NameValuePair> pairs = covertParams2NVPS(params);
         httpPost.setEntity(new UrlEncodedFormEntity(pairs, UTF_8));
         return getResult(httpPost);
     }
 
-    public static String httpPostRequest(String url, String json) throws UnsupportedEncodingException {
+    public static String httpPostJsonRequest(String url, Map<String, Object> headers, String json) throws UnsupportedEncodingException {
         HttpPost httpPost = new HttpPost(url);
+
+        for (Map.Entry<String, Object> param : headers.entrySet()) {
+            httpPost.addHeader(param.getKey(), String.valueOf(param.getValue()));
+        }
         httpPost.setEntity(new StringEntity(json, UTF_8));
         return getResult(httpPost);
     }

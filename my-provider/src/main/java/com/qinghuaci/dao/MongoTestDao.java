@@ -1,6 +1,7 @@
 package com.qinghuaci.dao;
 
 import com.qinghuaci.model.User;
+import org.mongodb.morphia.Key;
 
 import java.util.List;
 
@@ -12,7 +13,11 @@ import java.util.List;
 
 
 public interface MongoTestDao {
-    void save(User user);
+    Key<User> save(User user);
+
+    void addChildren(User user);
+
+    void updateChildren(User user);
 
     User find(User user);
 

@@ -8,9 +8,10 @@
 	   http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
 
 	<import resource="classpath:spring/spring-profile.xml" />
-	<import resource="classpath:spring/dubbo-provider.xml" />
+	<!--<import resource="classpath:spring/dubbo-provider.xml" />-->
 	<import resource="classpath:spring/spring-mongo.xml" />
 	<import resource="classpath:spring/spring-mq.xml" />
+	<!--<import resource="classpath:spring/spring-mybatis.xml" />-->
 
 	<!--Log Aop-->
 	<aop:config>

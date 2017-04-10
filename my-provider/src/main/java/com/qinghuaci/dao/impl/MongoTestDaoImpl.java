@@ -4,7 +4,9 @@ import com.google.common.base.Strings;
 import com.qinghuaci.dao.MongoTestDao;
 import com.qinghuaci.model.User;
 import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.Key;
 import org.mongodb.morphia.query.Query;
+import org.mongodb.morphia.query.UpdateOperations;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -24,8 +26,27 @@ public class MongoTestDaoImpl implements MongoTestDao {
     private Datastore datastore;
 
     @Override
-    public void save(User user) {
-        datastore.save(user);
+    public Key<User> save(User user) {
+        return datastore.save(user);
+    }
+
+    @Override
+    public void addChildren(User user) {
+        Query<User> query = datastore.createQuery(User.class)
+                                                       .field("id").equal(user.getId());
+        UpdateOperations<User> newClickEvent = datastore.createUpdateOperations(User.class)
+                                                        .add("tusers", user.getTusers().get(0), true);
+        datastore.update(query, newClickEvent);
+    }
+
+    @Override
+    public void updateChildren(User user) {
+        Query<User> query = datastore.createQuery(User.class)
+                                     .field("id").equal(user.getId())
+                                     .field("tusers.id").equal(user.getTusers().get(0).getId());
+        UpdateOperations<User> newClickEvent = datastore.createUpdateOperations(User.class)
+                                                        .set("tusers.$.name", user.getTusers().get(0).getName());
+        datastore.update(query, newClickEvent);
     }
 
     @Override

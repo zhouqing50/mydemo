@@ -1,10 +1,14 @@
 package dao;
 
+import com.google.common.collect.Lists;
 import com.qinghuaci.dao.MongoTestDao;
+import com.qinghuaci.model.Tuser;
 import com.qinghuaci.model.User;
 import lombok.extern.slf4j.Slf4j;
+import org.bson.types.ObjectId;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mongodb.morphia.Key;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -26,10 +30,34 @@ public class MongoTestDaoTest {
     @Test
     public void save() throws Exception{
         User user = new User();
-        user.setAge(121);
-        user.setName("wtest ccc");
-        user.setDesc("writing tutorials on w3cschool.cc");
-        mongoTestDao.save(user);
+        user.setAge(133);
+        user.setName("fff111");
+        user.setDesc("writing fasfasf on w3cschool.cc");
+        Key<User> key = mongoTestDao.save(user);
+        log.info("key={}", key.getId());
+    }
+
+    @Test
+    public void addChlidern() throws Exception{
+        User user = new User();
+        user.setId(new ObjectId("584fea1e3595002d441cac1e"));
+        Tuser tuser = new Tuser();
+        tuser.setId(2);
+        tuser.setName("222");
+        user.setTusers(Lists.newArrayList(tuser));
+        mongoTestDao.addChildren(user);
+    }
+
+
+    @Test
+    public void updateChlidern() throws Exception{
+        User user = new User();
+        user.setId(new ObjectId("584fea1e3595002d441cac1e"));
+        Tuser tuser = new Tuser();
+        tuser.setId(2);
+        tuser.setName("222bbb");
+        user.setTusers(Lists.newArrayList(tuser));
+        mongoTestDao.updateChildren(user);
     }
 
     @Test
